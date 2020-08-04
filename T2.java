@@ -58,12 +58,12 @@ public class T2  extends HttpServlet {
 			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/t2result.jsp");
 			 dispatcher.forward(request, response);
 		 } else if (action.equals("update")) {
-			 String number = request.getParameter("number").equalsIgnoreCase("") ? null : request.getParameter("number");
+			 String number = request.getParameter("number");
 			 String name = request.getParameter("name").equalsIgnoreCase("") ? null : request.getParameter("name");
 			 String attack = request.getParameter("attack").equalsIgnoreCase("") ? null : request.getParameter("attack");
 			 System.out.printf("%s %s %s\n", number, name, attack);
 			 T2DAO t2dao = new T2DAO();
-			 boolean success = t2dao.update(Integer.parseInt(number), name, Integer.parseInt(attack));
+			 boolean success = t2dao.update(Integer.parseInt(number), name, attack);
 			 if (success) {
 				 session.setAttribute("message", "update成功");
 			 } else {

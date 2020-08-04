@@ -80,7 +80,7 @@ public class T2DAO {
 		return true;
 	}
 
-	public boolean update(int number, String name, int attack) {
+	public boolean update(int number, String name, String attack) {
 		String url = "jdbc:h2:tcp://localhost/c:/pleiades/h2/s1832091";
 		try (Connection conn = DriverManager.getConnection(url, "user", "pass");) {
 			String sql = "UPDATE T2 SET 名前 = COALESCE(?, T2.名前), 攻撃力 = COALESCE(?, T2.攻撃力) WHERE T2.番号 = ?";
@@ -93,7 +93,7 @@ public class T2DAO {
 			if(Objects.isNull(attack)) {
 				pStmt.setNull(2, Types.NULL);
 			} else {
-				pStmt.setInt(2, attack);
+				pStmt.setInt(2, Integer.parseInt(attack));
 			}
 			pStmt.setInt(3, number);
 			int result = pStmt.executeUpdate();
